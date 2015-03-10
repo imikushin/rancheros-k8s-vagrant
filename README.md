@@ -1,12 +1,12 @@
 # RancherOS Vagrant
 
-Quickly checkout RancherOS using Vagrant/Virtualbox.
+Quickly checkout a multi-VM cluster based on RancherOS using Vagrant/Virtualbox.
 
 
 ## Getting started
 1.) Install dependencies
 
-* Virtualbox (Tested with 4.3.22)
+* Virtualbox (Tested with 4.3.24)
 * Vagrant (Tested with 1.7.2)
 
 2.) Clone this project
@@ -39,7 +39,7 @@ vagrant up
 ### Customizing and configuring
 
 
-To get a feel for how things work under the hood checkout the 
+To get a feel for how things work under the hood checkout the
 [RancherOS Repo](https://github.com/rancherio/os) for details.
 
 # License

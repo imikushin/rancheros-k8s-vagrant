@@ -1,1 +1,1 @@
-$num_minions=2
+$num_minions = 1
