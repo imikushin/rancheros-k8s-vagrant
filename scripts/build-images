@@ -5,6 +5,8 @@ PREFIX=imikushin
 
 cd $(dirname $0)/..
 
+./scripts/k8s-deps
+
 for i in scripts/dockerimages/[0-9]*; do
     tag=`echo ${i} | awk 'sub(/^.+\/[0-9]+-/, "")'`
     echo Building ${tag}
