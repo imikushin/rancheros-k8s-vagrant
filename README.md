@@ -20,7 +20,9 @@ cd os-vagrant
 
 ```
 vagrant up
-vagrant ssh
+vagrant ssh node-01
+vagrant ssh node-02
+...
 ```
 
 Start running Docker like you usually would!
@@ -29,11 +31,6 @@ Start running Docker like you usually would!
 
 To upgrade the Vagrant box, refresh this repository from master.
 
-```
-vagrant destroy
-vagrant box remove rancheros
-vagrant up
-```
 
 
 ### Customizing and configuring
