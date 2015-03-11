@@ -2,7 +2,7 @@
 set -x -e
 
 NODE_IP=`./node-ip.sh`
-MASTER_IP=`system-docker --rm --net=host imikushin/flannel /etcdctl get /rancher.io/k8s/master`
+MASTER_IP=`system-docker run --rm --net=host imikushin/flannel /etcdctl get /rancher.io/k8s/master`
 
 system-docker run --name=kube-proxy -d --restart=always --privileged \
   --ipc=host --pid=host --net=host \

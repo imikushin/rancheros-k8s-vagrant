@@ -1,9 +1,8 @@
 #!/bin/sh
 set -x -e
 
-public_ipv4=`ip -f inet -o addr show dev eth1 | awk 'gsub(/\/[0-9]+/,""){print $4}'`
+NODE_IP=`ip -f inet -o addr show dev eth1 | awk 'gsub(/\/[0-9]+/,""){print $4}'`
+MASTER_IP=`/etcdctl get /rancher.io/k8s/master`
 
-# FIXME replace 172.17.7.101 with MASTER_IP
-
-exec /kubelet --address=0.0.0.0 --port=10250 --hostname_override=${public_ipv4} \
-              --api_servers=172.17.7.101:8080 --logtostderr=true
+exec /kubelet --address=0.0.0.0 --port=10250 --hostname_override=${NODE_IP} \
+              --api_servers=${MASTER_IP}:8080 --logtostderr=true
