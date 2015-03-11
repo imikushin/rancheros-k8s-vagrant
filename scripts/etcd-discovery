@@ -3,4 +3,4 @@ set -x -e
 
 cd $(dirname $0)/..
 
-if [ ! -f ./.etcd-discovery-url ]; then curl -s https://discovery.etcd.io/new > ./.etcd-discovery-url; fi
+curl -s https://discovery.etcd.io/new?size=1 > ./.etcd-discovery-url
