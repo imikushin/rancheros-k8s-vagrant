@@ -2,13 +2,17 @@
 
 Deploy a local Kubernetes cluster on RancherOS using Vagrant/Virtualbox.
 
-# !!! Important !!!
+# IMPORTANT!
 
-**Every time** you recreate your cluster, run this: 
+**Every time** you recreate your cluster, **run this:** 
     
     ./scripts/etcd-discovery
 
-It generates `.etcd-discovery-url` file that is provisioned to your cluster nodes.  
+It generates `.etcd-discovery-url` file that is provisioned to your cluster nodes. 
+
+WARNING: In case you try to reuse this file (e.g. you've forgot to run `./scripts/etcd-discovery` 
+before `vagrant destroy -f && vagrant up`), the `etcd` nodes will try to become peers in already dead cluster. 
+
 
 ## Getting started
 1.) Install dependencies
@@ -16,6 +20,13 @@ It generates `.etcd-discovery-url` file that is provisioned to your cluster node
 * Virtualbox (Tested with 4.3.24)
 * Vagrant (Tested with 1.7.2)
 * Kubernetes `kubectl` (Tested with 0.12.0)
+
+You might also want to run a local Docker registry mirror:
+
+    docker run -d -p 5000:5000 -e STANDALONE=false \
+        -e MIRROR_SOURCE=https://registry-1.docker.io \
+        -e MIRROR_SOURCE_INDEX=https://index.docker.io \
+        registry
 
 2.) Clone this project
 
