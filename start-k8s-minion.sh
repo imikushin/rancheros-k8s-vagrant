@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x -e
 
+NODE_IP=`./node-ip.sh`
+
 # TODO maybe not --privileged
 
 sudo system-docker run --name=flannel -d --restart=always --privileged \

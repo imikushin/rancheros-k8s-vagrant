@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x -e
 
-MASTER_IP=`ip -f inet -o addr show dev eth1 | awk 'gsub(/\/[0-9]+/,""){print $4}'`
+NODE_IP=`./node-ip.sh`
 
 sudo system-docker run --name=etcd -d --restart=always \
   --net=host \
@@ -29,7 +29,7 @@ sudo system-docker run --name=kube-apiserver -d --restart=always --privileged \
   --volumes-from=command-volumes --volumes-from=system-volumes \
   kubernetes \
   /kube-apiserver --address=0.0.0.0 --port=8080 --portal_net=10.100.0.0/16 \
-  --etcd_servers=http://127.0.0.1:4001 --public_address_override=${MASTER_IP} --logtostderr=true
+  --etcd_servers=http://127.0.0.1:4001 --public_address_override=${NODE_IP} --logtostderr=true
 
 sudo system-docker run --name=kube-controller-manager -d --restart=always --privileged \
   --ipc=host --pid=host --net=host \

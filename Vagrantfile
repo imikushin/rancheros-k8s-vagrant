@@ -48,6 +48,12 @@ Vagrant.configure(2) do |config|
       ## Configure network not supported yet. using `auto_config: false`
       node.vm.network :private_network, type: :dhcp, auto_config: false
 
+      node.vm.provision "file", source: ".etcd-discovery-url", destination: "/home/rancher/.etcd-discovery-url"
+      node.vm.provision "file", source: "node-ip.sh", destination: "/home/rancher/node-ip.sh"
+      node.vm.provision "file", source: "start-k8s-master.sh", destination: "/home/rancher/start-k8s-master.sh"
+      node.vm.provision "file", source: "start-k8s-minion.sh", destination: "/home/rancher/start-k8s-minion.sh"
+      node.vm.provision "shell", inline: "echo Node_IP: `/home/rancher/node-ip.sh`", run: "always"
+
       ## Shared folders not supported yet
       node.vm.synced_folder ".", "/vagrant", disabled: true
 

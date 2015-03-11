@@ -2,6 +2,12 @@
 
 Quickly checkout a multi-VM cluster based on RancherOS using Vagrant/Virtualbox.
 
+# !!! Important !!!
+First and foremost, run this: 
+    
+    ./scripts/etcd-discovery
+
+This will generate `.etcd-discovery-url` file that will be provisioned to your cluster nodes. 
 
 ## Getting started
 1.) Install dependencies
