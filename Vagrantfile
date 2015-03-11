@@ -48,21 +48,22 @@ Vagrant.configure(2) do |config|
       ## Configure network not supported yet. using `auto_config: false`
       node.vm.network :private_network, type: :dhcp, auto_config: false
 
-      if i == 1
-        node.vm.provision "shell", inline: "touch /home/rancher/.k8s-master"
-      end
-
       node.vm.provision "file", source: ".etcd-discovery-url", destination: "/home/rancher/.etcd-discovery-url"
 
-      node.vm.provision "file", source: "node-ip.sh", destination: "/home/rancher/node-ip.sh"
-      node.vm.provision "shell", inline: "echo NODE_IP=`/home/rancher/node-ip.sh`", run: "always"
+      node.vm.provision "file", source: "src/node-ip.sh", destination: "/home/rancher/node-ip.sh"
+      if i == 1
+        node.vm.provision "shell", inline: "touch /home/rancher/.k8s-master"
+        node.vm.provision "shell", inline: "echo MASTER_IP=`/home/rancher/node-ip.sh`", run: "always"
+      else
+        node.vm.provision "shell", inline: "echo MINION_IP=`/home/rancher/node-ip.sh`", run: "always"
+      end
 
-      node.vm.provision "file", source: "registry-mirror.sh", destination: "/home/rancher/registry-mirror.sh"
-      node.vm.provision "file", source: "start-etcd.sh", destination: "/home/rancher/start-etcd.sh"
-      node.vm.provision "file", source: "start-k8s-master.sh", destination: "/home/rancher/start-k8s-master.sh"
-      node.vm.provision "file", source: "start-k8s-minion.sh", destination: "/home/rancher/start-k8s-minion.sh"
+      node.vm.provision "file", source: "src/registry-mirror.sh", destination: "/home/rancher/registry-mirror.sh"
+      node.vm.provision "file", source: "src/start-etcd.sh", destination: "/home/rancher/start-etcd.sh"
+      node.vm.provision "file", source: "src/start-k8s-master.sh", destination: "/home/rancher/start-k8s-master.sh"
+      node.vm.provision "file", source: "src/start-k8s-minion.sh", destination: "/home/rancher/start-k8s-minion.sh"
 
-      node.vm.provision "file", source: "start-node.sh", destination: "/home/rancher/start-node.sh"
+      node.vm.provision "file", source: "src/start-node.sh", destination: "/home/rancher/start-node.sh"
       node.vm.provision "shell", inline: "/home/rancher/start-node.sh"
 
       ## Shared folders not supported yet

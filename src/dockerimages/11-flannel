@@ -1,0 +1,9 @@
+FROM debian:7.8
+RUN apt-get update && apt-get install -y curl
+COPY  src/dockerimages/tmp/etcd/etcd \
+      src/dockerimages/tmp/etcd/etcdctl \
+      src/dockerimages/tmp/flannel/flannel \
+      src/dockerimages/scripts/flannel.sh \
+      src/dockerimages/scripts/flannel-conf.sh \
+      /
+CMD ["/flannel.sh"]

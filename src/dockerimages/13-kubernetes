@@ -1,0 +1,6 @@
+FROM debian:7.8
+RUN apt-get update && apt-get install -y kmod bridge-utils iptables curl
+COPY  src/dockerimages/tmp/k8s/* \
+      src/dockerimages/tmp/etcd/etcdctl \
+      src/dockerimages/scripts/kubelet.sh \
+      src/dockerimages/scripts/k8s-docker.sh /

@@ -1,4 +1,4 @@
 *.box
 .vagrant
-/scripts/dockerimages/tmp
+/src/dockerimages/tmp
 /.etcd-discovery-url

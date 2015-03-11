@@ -6,7 +6,7 @@ k8s_v="v0.12.0"
 
 cd $(dirname $0)/..
 
-tmp_dir=scripts/dockerimages/tmp
+tmp_dir=src/dockerimages/tmp
 
 mkdir -p ${tmp_dir}
 
