@@ -22,5 +22,5 @@ rm -f /var/run/docker.pid
 ip link set down dev docker0
 brctl delbr docker0
 
-exec >/var/log/userdocker.log 2>&1
+#exec >/var/log/userdocker.log 2>&1
 exec docker -d -s overlay -G docker --bip=${FLANNEL_SUBNET} --mtu=${FLANNEL_MTU}
