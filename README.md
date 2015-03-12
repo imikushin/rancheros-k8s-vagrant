@@ -19,7 +19,7 @@ before `vagrant destroy -f && vagrant up`), the `etcd` nodes will try to become 
 
 * Virtualbox (Tested with 4.3.24)
 * Vagrant (Tested with 1.7.2)
-* Kubernetes `kubectl` (Tested with 0.12.0)
+* Kubernetes `kubectl` (Tested with 0.12.1)
 
 You might also want to run a local Docker registry mirror:
 

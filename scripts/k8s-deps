@@ -1,8 +1,8 @@
 #!/bin/bash
 set -x -e
 
-etcd_v="v2.0.4"
-k8s_v="v0.12.0"
+etcd_v="v2.0.5"
+k8s_v="v0.12.1"
 
 cd $(dirname $0)/..
 
