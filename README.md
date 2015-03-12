@@ -49,8 +49,12 @@ vagrant ssh node-02
 vagrant ssh node-03
 ```
 
-Set `KUBERNETES_MASTER=http://${MASTER_IP}:8080` environment variable. 
-Use Kubernetes `kubectl` utility as usual to manage your Kubernetes cluster.  
+Kubernetes launch script log is written to `/var/log/start.log`. You can watch it with
+
+    tail -f /var/log/start.log
+
+Set `KUBERNETES_MASTER=http://${MASTER_IP}:8080` environment variable on your host machine. 
+Use Kubernetes `kubectl` utility (on your host) as usual to manage your Kubernetes cluster.  
 
 
 ## Upgrading RancherOS Versions
