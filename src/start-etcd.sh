@@ -7,6 +7,7 @@ NODE_IP=`./node-ip.sh`
 REGISTRY_MIRROR=`./registry-mirror.sh`
 DISCOVERY_URL=`cat .etcd-discovery-url`
 
+system-docker rm etcd && :
 system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=etcd -d --restart=always \
   --net=host \
   imikushin/flannel /etcd \

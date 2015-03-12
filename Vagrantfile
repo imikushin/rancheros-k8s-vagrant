@@ -64,7 +64,9 @@ Vagrant.configure(2) do |config|
       node.vm.provision "file", source: "src/start-k8s-minion.sh", destination: "/home/rancher/start-k8s-minion.sh"
 
       node.vm.provision "file", source: "src/start-node.sh", destination: "/home/rancher/start-node.sh"
-      node.vm.provision "shell", inline: "/home/rancher/start-node.sh"
+      node.vm.provision "file", source: "src/start.sh", destination: "/home/rancher/start.sh"
+      node.vm.provision "shell", inline: "mkdir -p /opt/rancher/bin && mv -f /home/rancher/start.sh /opt/rancher/bin/start.sh"
+      node.vm.provision "shell", inline: "/opt/rancher/bin/start.sh"
 
       ## Shared folders not supported yet
       node.vm.synced_folder ".", "/vagrant", disabled: true

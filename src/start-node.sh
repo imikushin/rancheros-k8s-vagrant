@@ -11,18 +11,20 @@ REGISTRY_MIRROR=`./registry-mirror.sh`
 system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=flannel-conf --rm --net=host imikushin/flannel /flannel-conf.sh
 
 # TODO maybe not --privileged
+system-docker rm flannel && :
 system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=flannel -d --restart=always --privileged \
   --ipc=host --pid=host --net=host \
   --volumes-from=command-volumes --volumes-from=system-volumes \
-  imikushin/flannel /flannel.sh && :
+  imikushin/flannel /flannel.sh
 
 system-docker stop userdocker && system-docker rm userdocker && :
 
+system-docker rm k8s-docker && :
 system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=k8s-docker -d --restart=always --privileged \
   --ipc=host --pid=host --net=host \
   --volumes-from=command-volumes --volumes-from=user-volumes --volumes-from=system-volumes \
   -v=/var/lib/rancher/state/docker:/var/lib/docker \
-  imikushin/kubernetes /k8s-docker.sh && :
+  imikushin/kubernetes /k8s-docker.sh
 
 if [ -f ./.k8s-master ]; then
   system-docker run --rm --net=host imikushin/flannel /etcdctl set /rancher.io/k8s/master "${NODE_IP}"
