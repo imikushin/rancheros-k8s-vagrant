@@ -12,7 +12,7 @@ system-docker run --name=kube-apiserver -d --restart=always --privileged \
   --volumes-from=command-volumes --volumes-from=system-volumes \
   imikushin/kubernetes \
   /kube-apiserver --address=0.0.0.0 --port=${MASTER_PORT} --portal_net=10.100.0.0/16 \
-  --etcd_servers=http://127.0.0.1:2379 --public_address_override=${NODE_IP} --logtostderr=true
+                  --etcd_servers=http://127.0.0.1:2379 --public_address_override=${NODE_IP} --logtostderr=true
 
 system-docker rm kube-controller-manager && :
 system-docker run --name=kube-controller-manager -d --restart=always --privileged \
