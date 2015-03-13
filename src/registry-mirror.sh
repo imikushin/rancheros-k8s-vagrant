@@ -3,7 +3,7 @@ set -e
 
 cd $(dirname $0)
 
-NODE_IP=`./node-ip.sh`
+NODE_IP=${NODE_IP:?"NODE_IP not set"}
 
 REGISTRY_IP=`echo ${NODE_IP} | awk 'sub(/[0-9]+$/, "1")'`
 
