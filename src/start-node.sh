@@ -8,7 +8,9 @@ export REGISTRY_MIRROR=`./registry-mirror.sh`
 
 ./start-etcd.sh
 
-system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=flannel-conf --rm --net=host imikushin/flannel /flannel-conf.sh
+system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=flannel-conf --rm --net=host \
+  -e FLANNEL_NETWORK="10.244.0.0/16" \
+  imikushin/flannel /flannel-conf.sh
 
 # TODO maybe not --privileged
 system-docker rm flannel && :
