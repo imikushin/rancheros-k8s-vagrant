@@ -1,8 +1,8 @@
-# RancherOS Vagrant
+# Kubernetes on RancherOS with Vagrant
 
-Deploy a local Kubernetes cluster on RancherOS using Vagrant/Virtualbox.
+Run a local Kubernetes cluster on RancherOS using Vagrant/VirtualBox.
 
-# IMPORTANT!
+## IMPORTANT!
 
 **Every time** you recreate your cluster, **run this:** 
     
