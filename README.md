@@ -10,8 +10,8 @@ Run a local Kubernetes cluster on RancherOS using Vagrant/VirtualBox.
 
 It generates `.etcd-discovery-url` file that is provisioned to your cluster nodes. 
 
-WARNING: In case you try to reuse this file (e.g. you've forgot to run `./scripts/etcd-discovery` 
-before `vagrant destroy -f && vagrant up`), the `etcd` nodes will try to become peers in already dead cluster. 
+WARNING: In case you try to reuse this file (e.g. forgot to run `./scripts/etcd-discovery` 
+before `vagrant destroy -f && vagrant up` or even `vagrant reload`), your `etcd` nodes will try to become peers in an already dead cluster. 
 
 
 ## Getting started

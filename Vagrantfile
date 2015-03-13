@@ -48,7 +48,7 @@ Vagrant.configure(2) do |config|
       ## Configure network not supported yet. using `auto_config: false`
       node.vm.network :private_network, type: :dhcp, auto_config: false
 
-      node.vm.provision "file", source: ".etcd-discovery-url", destination: "/home/rancher/.etcd-discovery-url"
+      node.vm.provision "file", source: ".etcd-discovery-url", destination: "/home/rancher/.etcd-discovery-url", run: "always"
 
       node.vm.provision "file", source: "src/node-ip.sh", destination: "/home/rancher/node-ip.sh"
       if i == 1
@@ -65,8 +65,7 @@ Vagrant.configure(2) do |config|
 
       node.vm.provision "file", source: "src/start-node.sh", destination: "/home/rancher/start-node.sh"
       node.vm.provision "file", source: "src/start.sh", destination: "/home/rancher/start.sh"
-      node.vm.provision "shell", inline: "mkdir -p /opt/rancher/bin && mv -f /home/rancher/start.sh /opt/rancher/bin/start.sh"
-      node.vm.provision "shell", inline: "/opt/rancher/bin/start.sh"
+      node.vm.provision "shell", inline: "/home/rancher/start.sh", run: "always"
 
       ## Shared folders not supported yet
       node.vm.synced_folder ".", "/vagrant", disabled: true
