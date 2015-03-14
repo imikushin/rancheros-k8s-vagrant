@@ -6,8 +6,8 @@ MASTER_ENDPOINT=`system-docker run --rm --net=host imikushin/flannel /etcdctl ge
 
 system-docker rm kube-proxy && :
 system-docker run --name=kube-proxy -d --restart=always --privileged \
-  --ipc=host --pid=host --net=host \
-  --volumes-from=command-volumes --volumes-from=system-volumes \
+  --net=host \
+  --volumes-from=system-volumes \
   imikushin/kubernetes /kube-proxy --etcd_servers=http://127.0.0.1:2379 --logtostderr=true
 
 system-docker rm kubelet && :

@@ -15,8 +15,8 @@ system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=flannel-conf --rm 
 
 system-docker rm flannel && :
 system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=flannel -d --restart=always --privileged \
-  --ipc=host --pid=host --net=host \
-  --volumes-from=command-volumes --volumes-from=system-volumes \
+  --net=host \
+  --volumes-from=system-volumes \
   imikushin/flannel /flannel --iface=eth1
 
 system-docker stop userdocker && system-docker rm userdocker && :
