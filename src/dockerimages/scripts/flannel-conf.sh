@@ -7,6 +7,4 @@ done
 
 FLANNEL_NETWORK=${FLANNEL_NETWORK:?"FLANNEL_NETWORK not set"}
 
-/etcdctl mk /coreos.com/network/config "{\"Network\":\"${FLANNEL_NETWORK}\",\"Backend\":{\"Type\":\"vxlan\"}}" && :
-
-/etcdctl get /coreos.com/network/config
+/etcdctl set /coreos.com/network/config "{\"Network\":\"${FLANNEL_NETWORK}\",\"Backend\":{\"Type\":\"vxlan\"}}"
