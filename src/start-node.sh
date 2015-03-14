@@ -13,7 +13,6 @@ system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=flannel-conf --rm 
   -e FLANNEL_NETWORK="10.244.0.0/16" \
   imikushin/flannel /flannel-conf.sh
 
-# TODO maybe not --privileged
 system-docker rm flannel && :
 system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=flannel -d --restart=always --privileged \
   --ipc=host --pid=host --net=host \
