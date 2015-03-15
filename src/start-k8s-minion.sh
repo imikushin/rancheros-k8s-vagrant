@@ -22,6 +22,6 @@ system-docker run --rm \
   --net=host \
   imikushin/kubernetes \
   curl  -si -X POST http://${MASTER_ENDPOINT}/api/v1beta2/minions -H 'content-type: application/json' \
-        -d "{\"kind\":\"Minion\",\"apiVersion\":\"v1beta2\",\"id\":\"${NODE_IP}\",\"hostIP\":\"${NODE_IP}\"}" && :
+        -d "{\"kind\":\"Minion\",\"apiVersion\":\"v1beta2\",\"id\":\"${NODE_IP}\",\"hostIP\":\"${NODE_IP}\"}"
 
 echo Minion ${NODE_IP} up!
