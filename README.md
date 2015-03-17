@@ -21,7 +21,7 @@ before `vagrant destroy -f && vagrant up` or even `vagrant reload`), your `etcd`
 * Vagrant (Tested with 1.7.2)
 * Kubernetes `kubectl` (Tested with 0.12.1)
 
-You might also want to run a local Docker registry mirror:
+You might also want to run a local Docker registry mirror on your host machine:
 
     docker run -d -p 5000:5000 -e STANDALONE=false \
         -e MIRROR_SOURCE=https://registry-1.docker.io \
@@ -38,7 +38,7 @@ cd rancheros-k8s-vagrant
 3.) Up and Running
 
 ```
-vagrant up
+./scripts/etcd-discovery; vagrant up
 ```
 
 Watch for `==> node-01: MASTER_IP=...` message in the log. `MASTER_IP` value is your Kubernetes master node address. 
@@ -57,16 +57,16 @@ Set `KUBERNETES_MASTER=http://${MASTER_IP}:8080` environment variable on your ho
 Use Kubernetes `kubectl` utility (on your host) as usual to manage your Kubernetes cluster.  
 
 
-## Upgrading RancherOS Versions
+## Upgrading RancherOS and Kubernetes Versions
 
-To upgrade the Vagrant box, refresh this repository from master.
+To upgrade the Vagrant box and dependencies, refresh this repository from master.
 
 
 
 ### Customizing and configuring
 
 
-To get a feel for how things work under the hood checkout the
+To get a feel for how RancherOS works under the hood checkout the
 [RancherOS Repo](https://github.com/rancherio/os) for details.
 
 # License
