@@ -70,6 +70,7 @@ To get a feel for how RancherOS works under the hood checkout the
 [RancherOS Repo](https://github.com/rancherio/os) for details.
 
 # License
+Copyright (c) 2015 [Ivan Mikushin](https://github.com/imikushin)
 Copyright (c) 2014-2015 [Rancher Labs, Inc.](http://rancher.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
