@@ -4,11 +4,10 @@ set -x -e
 cd $(dirname $0)
 
 NODE_IP=${NODE_IP:?"NODE_IP not set"}
-REGISTRY_MIRROR=${REGISTRY_MIRROR:?"REGISTRY_MIRROR not set"}
 DISCOVERY_URL=`cat .etcd-discovery-url`
 
 system-docker rm etcd && :
-system-docker --registry-mirror=${REGISTRY_MIRROR} run --name=etcd -d --restart=always \
+system-docker run --name=etcd -d --restart=always \
   --net=host \
   imikushin/flannel \
   /etcd --initial-advertise-peer-urls http://${NODE_IP}:2380 \

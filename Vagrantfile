@@ -58,7 +58,6 @@ Vagrant.configure(2) do |config|
         node.vm.provision "shell", inline: "echo MINION_IP=`/home/rancher/node-ip.sh`", run: "always"
       end
 
-      node.vm.provision "file", source: "src/registry-mirror.sh", destination: "/home/rancher/registry-mirror.sh"
       node.vm.provision "file", source: "src/start-etcd.sh", destination: "/home/rancher/start-etcd.sh"
       node.vm.provision "file", source: "src/start-k8s-master.sh", destination: "/home/rancher/start-k8s-master.sh"
       node.vm.provision "file", source: "src/start-k8s-minion.sh", destination: "/home/rancher/start-k8s-minion.sh"
