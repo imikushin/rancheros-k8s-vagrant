@@ -2,6 +2,7 @@
 set -x -e
 
 etcd_v="v2.0.10"
+flannel_v="0.4.0"
 k8s_v="v0.15.0"
 
 cd $(dirname $0)/..
@@ -17,6 +18,16 @@ if [[ ! -f ./${tmp_dir}/etcd/etcdctl ]]; then
   tar -xzf ${etcd_dist}.tar.gz
   mv ${etcd_dist} etcd
   rm ${etcd_dist}.tar.gz
+  cd ../../..
+fi
+flannel_dist="flannel-${flannel_v}-linux-amd64"
+if [[ ! -f ./${tmp_dir}/flannel/flannel ]]; then
+  cd ${tmp_dir}
+  curl -L  https://github.com/coreos/flannel/releases/download/v${flannel_v}/${flannel_dist}.tar.gz -o ${flannel_dist}.tar.gz
+  tar -xzf ${flannel_dist}.tar.gz
+  mv flannel-${flannel_v} flannel
+  mv flannel/flanneld flannel/flannel
+  rm ${flannel_dist}.tar.gz
   cd ../../..
 fi
 if [[ ! -f ./${tmp_dir}/k8s/kubelet ]]; then
@@ -36,10 +47,4 @@ if [[ ! -f ./${tmp_dir}/k8s/kubelet ]]; then
   chmod +x ${tmp_dir}/k8s/kube-scheduler
   chmod +x ${tmp_dir}/k8s/kube-proxy
   chmod +x ${tmp_dir}/k8s/kubelet
-fi
-if [[ ! -f ./${tmp_dir}/flannel/flannel ]]; then
-  mkdir -p ${tmp_dir}/flannel
-  docker run -i -t google/golang /bin/bash -c "go get github.com/coreos/flannel"
-  docker cp `docker ps -lq`:/gopath/bin/flannel ${tmp_dir}/flannel/
-  docker rm `docker ps -lq`
 fi
