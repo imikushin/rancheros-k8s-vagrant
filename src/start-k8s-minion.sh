@@ -8,7 +8,7 @@ system-docker rm kube-proxy && :
 system-docker run --name=kube-proxy -d --restart=always --privileged \
   --net=host \
   --volumes-from=system-volumes \
-  imikushin/kubernetes /kube-proxy --etcd_servers=http://127.0.0.1:2379 --logtostderr=true
+  imikushin/kubernetes /kube-proxy --master=http://${MASTER_ENDPOINT} --v=2 --logtostderr=true
 
 system-docker rm kubelet && :
 system-docker run --name=kubelet -d --restart=always --privileged \
@@ -16,7 +16,7 @@ system-docker run --name=kubelet -d --restart=always --privileged \
   --volumes-from=command-volumes --volumes-from=system-volumes \
   imikushin/kubernetes \
   /kubelet  --address=0.0.0.0 --port=10250 --hostname_override=${NODE_IP} \
-            --api_servers=${MASTER_ENDPOINT} --logtostderr=true
+            --api_servers=${MASTER_ENDPOINT} --v=2 --logtostderr=true
 
 system-docker run --rm \
   --net=host \
